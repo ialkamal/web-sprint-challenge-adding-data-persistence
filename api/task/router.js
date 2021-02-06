@@ -14,18 +14,24 @@ router.get("/", (req, res, next) => {
     });
 });
 
-router.post("/", checkBody, (req, res, next) => {
+router.post("/", checkBody, async (req, res, next) => {
   const task = req.task;
+
   Tasks.addTask(task)
-    .then(async (newId) => {
-      try {
-        const newTask = await Tasks.getTask(newId);
-        res.status(201).send(newTask);
-      } catch (err) {
-        err.statusCode = 500;
-        err.message = "Failed to add a new task.";
-        next(err);
-      }
+    .then((newId) => {
+      const [id] = newId;
+      console.log("id: ", id);
+      Tasks.getTask(id)
+        .then((newTask) => {
+          console.log("NEW: ", newTask);
+          res.status(201).send(newTask);
+        })
+        .catch((err) => {
+          console.log(err);
+          err.statusCode = 500;
+          err.message = "Failed to add a new task.";
+          next(err);
+        });
     })
     .catch((err) => {
       err.statusCode = 500;

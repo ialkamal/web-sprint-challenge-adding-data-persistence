@@ -6,16 +6,16 @@ async function getProjects() {
   return projects.map((project) => {
     return {
       ...project,
-      project_completed: project.project_completed === 0 ? false : true,
+      project_completed: project.project_completed == 0 ? false : true,
     };
   });
 }
 
 async function getProject(id) {
-  const project = await db("projects").where({ project_id: id });
+  const [project] = await db("projects").where({ project_id: id });
   return {
     ...project,
-    project_completed: project.project_completed === 0 ? false : true,
+    project_completed: project.project_completed == 0 ? false : true,
   };
 }
 

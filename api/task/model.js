@@ -20,18 +20,17 @@ async function getTasks() {
     console.log(task.task_completed);
     return {
       ...task,
-      task_completed:
-        task.task_completed === 0 ? false : true,
+      task_completed: task.task_completed == 0 ? false : true,
     };
   });
 }
 
 async function getTask(id) {
-  const task = db("tasks").where({ task_id: id });
+  const [task] = await db("tasks").where({ task_id: id });
+  console.log("TASK: ", task);
   return {
     ...task,
-    task_completed:
-      task.task_completed === 0 ? false : true,
+    task_completed: task.task_completed == 0 ? false : true,
   };
 }
 

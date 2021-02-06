@@ -18,7 +18,8 @@ router.post("/", checkBody, (req, res, next) => {
   Resources.addResource(resource)
     .then(async (newId) => {
       try {
-        const [newResource] = await Resources.getResource(newId);
+        const [id] = newId;
+        const newResource = await Resources.getResource(id);
         res.status(201).send(newResource);
       } catch (err) {
         err.statusCode = 500;
