@@ -1,12 +1,38 @@
 // build your `Task` model here
 const db = require("../../data/dbConfig");
 
-function getTasks() {
-  return db("tasks");
+async function getTasks() {
+  //   const tasks = await db("tasks");
+  const tasks = await db
+    .select(
+      "tasks.task_id",
+      "tasks.task_description",
+      "tasks.task_notes",
+      "tasks.task_completed",
+      "projects.project_name",
+      "projects.project_description"
+    )
+    .from("tasks")
+    .join("projects", "tasks.project_id", "=", "projects.project_id");
+
+  await console.log(tasks);
+  return tasks.map((task) => {
+    console.log(task.task_completed);
+    return {
+      ...task,
+      task_completed:
+        task.task_completed === 0 ? false : true,
+    };
+  });
 }
 
-function getTask(id) {
-  return db("tasks").where({ task_id: id });
+async function getTask(id) {
+  const task = db("tasks").where({ task_id: id });
+  return {
+    ...task,
+    task_completed:
+      task.task_completed === 0 ? false : true,
+  };
 }
 
 function addTask(task) {

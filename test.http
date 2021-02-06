@@ -40,3 +40,19 @@ Content-Type: application/json
     "project_description": "awesome.",
     "project_completed": false
 }
+
+###
+
+POST http://localhost:5000/api/tasks
+Content-Type: application/json
+
+{
+    "task_description" : "hey, welcome, Mojo Make it Happen",
+    "task_notes": "awesome.",
+    "task_completed": false,
+    "project_id": 4
+}
+
+###
+
+GET http://localhost:5000/api/tasks

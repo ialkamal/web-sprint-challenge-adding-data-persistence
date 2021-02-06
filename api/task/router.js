@@ -19,7 +19,7 @@ router.post("/", checkBody, (req, res, next) => {
   Tasks.addTask(task)
     .then(async (newId) => {
       try {
-        const [newTask] = await Tasks.getTask(newId);
+        const newTask = await Tasks.getTask(newId);
         res.status(201).send(newTask);
       } catch (err) {
         err.statusCode = 500;
@@ -37,7 +37,7 @@ router.post("/", checkBody, (req, res, next) => {
 async function checkBody(req, res, next) {
   const task = req.body;
 
-  if (!task || !task.task_name || !task.project_id) {
+  if (!task || !task.task_description || !task.project_id) {
     const err = new Error();
     err.statusCode = 400;
     err.message =
@@ -45,9 +45,9 @@ async function checkBody(req, res, next) {
     next(err);
   } else {
     try {
-      const [project] = await Projects.getProject(task.project_id);
+      const project = await Projects.getProject(task.project_id);
 
-      if (!project || project.length === 0) {
+      if (!project) {
         const err = new Error();
         err.statusCode = 404;
         err.message = "Project with that id doesn't exist!";
