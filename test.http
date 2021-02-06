@@ -1,0 +1,42 @@
+GET http://localhost:5000/api/projects
+
+###
+
+POST http://localhost:5000/api/projects
+Content-Type: application/json
+
+{
+    "project_name" : "Raising baby elephants",
+    "project_description" : "The hard task of raising elephants in the jungle."
+}
+
+###
+
+POST http://localhost:5000/api/projects
+Content-Type: application/json
+
+{
+    "project_name" : "Working on my coding skills"
+}
+
+###
+
+POST http://localhost:5000/api/projects
+Content-Type: application/json
+
+{
+    "project_name" : "Building a new world!",
+    "project_description": "really.",
+    "project_completed": true
+}
+
+###
+
+POST http://localhost:5000/api/projects
+Content-Type: application/json
+
+{
+    "project_name" : "Mojo, Mojo, Mojo Make it Happen",
+    "project_description": "awesome.",
+    "project_completed": false
+}
