@@ -5,8 +5,9 @@ function getResources() {
   return db("resources");
 }
 
-function getResource(id) {
-  return db("resources").where({ resource_id: id });
+async function getResource(id) {
+  const [resource] = await db("resources").where({ resource_id: id });
+  return resource;
 }
 
 function addResource(resource) {
