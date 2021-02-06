@@ -64,5 +64,5 @@ POST http://localhost:5000/api/resources
 Content-Type: application/json
 
 {
-    "resource_name" : "as on my coding skills"
+    "resource_name" : "who on my coding skills"
 }

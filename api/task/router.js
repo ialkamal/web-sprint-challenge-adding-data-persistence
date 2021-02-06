@@ -20,7 +20,6 @@ router.post("/", checkBody, async (req, res, next) => {
   Tasks.addTask(task)
     .then((newId) => {
       const [id] = newId;
-      console.log("id: ", id);
       Tasks.getTask(id)
         .then((newTask) => {
           console.log("NEW: ", newTask);
