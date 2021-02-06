@@ -24,7 +24,7 @@ exports.up = function (knex) {
         .onDelete("CASCADE")
         .onUpdate("CASCADE");
     })
-    .createTable("resources_projects", (tbl) => {
+    .createTable("project_resources", (tbl) => {
       tbl
         .integer("project_id")
         .notNullable()
@@ -45,7 +45,7 @@ exports.up = function (knex) {
 
 exports.down = function (knex) {
   return knex.schema
-    .dropTableIfExists("resources_projects")
+    .dropTableIfExists("project_resources")
     .dropTableIfExists("tasks")
     .dropTableIfExists("resources")
     .dropTableIfExists("projects");
